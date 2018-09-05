@@ -21,6 +21,7 @@ var obstaculos2 = []
 var score2 = 0;
 var notas2 = []
 var interval2;
+var obstaculosInterval2
 var frames2 = 0;
 var time2 = 0;
 var images2 = {
@@ -209,39 +210,39 @@ function update2(){
     personaje2.draw()
     drawObstaculos2()
     checkCollitions2()
-    if((time2/60)===10)gameOver()
+    if((time2/60)===10)gameOver2()
     time2++
+    //frames2++
 }
 
 function start2(){
     if(interval2) return
     if(board2.stage1 == true) {
         interval2 = setInterval(update2, 1000/60);
-        var obstaculosInterval2 = setInterval(generateObstaculos2,5000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,5000)
     }
     if(board2.stage2 == true) {
         interval2 = setInterval(update2, 1000/60);
-        var obstaculosInterval2 = setInterval(generateObstaculos2,4000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,4000)
     }
     if(board2.stage3 == true) {
         interval2 = setInterval(update2, 1000/60);
-        var obstaculosInterval2 = setInterval(generateObstaculos2,3000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,3000)
     }
     if(board2.stage4 == true) {
         interval2 = setInterval(update2, 1000/60);
-        var obstaculosInterval2 = setInterval(generateObstaculos2,2000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,2000)
     }
 }
 
 
 function gameOver2(){
-    clearInterval(interval)
-    ctx2.font = "80px Avenir"
-    ctx2.fillText("Game Over", 50,250)
-    ctx2.font = "50px Avenir"
+    clearInterval(interval2)
+    higherScore2()
+    clearInterval(obstaculosInterval2)
+    interval2 = null
     ctx2.fillStyle = "yellow"
     ctx2.fillText("Press 'esc' to restart", 50,300)
-    interval2 = null
 }
 
 //funciones Auxiliares
@@ -279,43 +280,35 @@ function checkCollitions2(){
             var pos2 = obstaculos2.indexOf(obstaculo2);
             obstaculos2.splice(obstaculo2);
             if(obstaculo2.tipo=="Tomate"){
-                console.log ("Resta")
                 score2--
             } 
             if(obstaculo2.tipo=="Botella"){
-                console.log ("Resta")
                 score2--
             }
             if(obstaculo2.tipo=="Nota"){
-                console.log("Suma")
                 score2++
             }
         }
     })
 }
 
+function higherScore2(){
+    if (score === score2){
+        ctx2.font = "60px Avenir"
+        ctx2.fillText("You Both Rock or Suck", 50,250)
+        ctx2.fillText("♫: " + score2, 50,350)
+    } else if (score2 > score){
+        ctx2.font = "60px Avenir"
+        ctx2.fillText("You Rock!!", 50,250)
+        ctx2.fillText("♫: " + score2, 50,350)
+    } else {
+        ctx2.font = "60px Avenir"
+        ctx2.fillText("You Suck!!", 50,250)
+        ctx2.fillText("♫: " + score2, 50,350)
+    }
+}
 
 //los observadores
-
-
- document.onkeydown=function(e){
-    switch(e.keyCode) {
-      case 65:
-      if (personaje2.x<180) return
-      personaje2.goLeft2()
-      break;
-      case 68: 
-      if (personaje2.x>580)return
-      personaje2.goRight2()
-      break;
-     }
-
-      if(e.key = "Enter"){
-      start2()
-      board.music.play()
-    }
-
-  }
 
 
 

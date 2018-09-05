@@ -8,9 +8,10 @@ var ctx = canvas.getContext('2d')
 var tomates = []
 var botellas = []
 var obstaculos = []
-var score = 0;
+var score = 0
 var notas = []
 var interval;
+var obstaculosInterval
 var frames = 0;
 var time = 0;
 var images = {
@@ -201,52 +202,56 @@ var botella = new Botellas()
 
 //Funciones principales
 function update(){
+    console.log(frames)
     ctx.clearRect(0,0,canvas.width,canvas.height)
     board.draw()
     personaje.draw()
     drawObstaculos()
     checkCollitions()
-    if((time/60)===60)gameOver()
+    if((time/60)===10) gameOver()
     time++
+   // frames++
 }
 
 function start(){
     if(interval) return
     if(board.stage1 == true) {
         interval = setInterval(update, 1000/60);
-        var obstaculosInterval = setInterval(generateObstaculos,5000)
+        obstaculosInterval = setInterval(generateObstaculos,5000)
     }
     if(board.stage2 == true) {
         interval = setInterval(update, 1000/60);
-        var obstaculosInterval = setInterval(generateObstaculos,4000)
+        obstaculosInterval = setInterval(generateObstaculos,4000)
     }
     if(board.stage3 == true) {
         interval = setInterval(update, 1000/60);
-        var obstaculosInterval = setInterval(generateObstaculos,3000)
+        obstaculosInterval = setInterval(generateObstaculos,3000)
     }
     if(board.stage4 == true) {
         interval = setInterval(update, 1000/60);
-        var obstaculosInterval = setInterval(generateObstaculos,2000)
+        obstaculosInterval = setInterval(generateObstaculos,2000)
     }
     
 }
 
-
 function gameOver(){
+        frames=0
         clearInterval(interval)
-        ctx.font = "80px Avenir"
-        ctx.fillText("Game Over", 50,250)
-        ctx.font = "50px Avenir"
+        clearInterval(obstaculosInterval)
+        interval = null
+        higherScore()
+        board.smoke.pause()
+        board.back.pause()
+        board.fuel.pause()
+        board.chona.pause()
         ctx.fillStyle = "yellow"
         ctx.fillText("Press 'esc' to restart", 50,300)
-        interval = null
-
 }
 
 //funciones Auxiliares
 
 function generateObstaculos(){
-    if(frames % 200 === 0){
+    if(frames % 100 === 0){
         var obstaculo1 = new Tomates(90,"Tomate")
         var obstaculo2 = new Tomates(270,"Tomate")
         var obstaculo3 = new Notas(450,"Nota")
@@ -291,7 +296,21 @@ function checkCollitions(){
 }
 
 
-
+function higherScore (){
+    if (score === score2){
+        ctx.font = "60px Avenir"
+        ctx.fillText("You Both Rock or Suck", 50,250)
+        ctx.fillText("♫: " + score, 50,350)
+    } else if (score > score2){
+        ctx.font = "60px Avenir"
+        ctx.fillText("You Rock!!" + score, 50,250)
+        ctx.fillText("♫: " + score, 50,350)
+    } else {
+        ctx.font = "60px Avenir"
+        ctx.fillText("You Suck!!" + score , 50,250)
+        ctx.fillText("♫: " + score, 50,350)
+    }
+}
 
 //los observadores
 
@@ -346,13 +365,13 @@ nivel4.addEventListener ("click", function(){
         if (personaje2.x>580)return
         personaje2.goRight2()
         break;
-     
-
+        case 27:
+        if(e.keyCode === 27){
+            start()
+           }
      }
 
   }
-
-
 
 
 
