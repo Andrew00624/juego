@@ -1,14 +1,4 @@
 
-/*window.onload = function() {
-    document.getElementById("start-button").click = function() {
-      startGame();
-    };
-  
-    function startGame() {
-
-    }
-}*/
-
 //Canvas config
 var canvas2 = document.getElementById('player-2');
 var ctx2 = canvas2.getContext('2d')
@@ -28,8 +18,8 @@ var images2 = {
     bg2:"./images/stage2.jpg",
     personaje2:"./images/guitarist2.png",
     tomate2: "./images/tomato2.png",
-    botella2:"./images/water2.png",
-    nota2: "./images/music-player2.png"
+    botella2:"./images/bottle.png",
+    nota2: "./images/note2.png"
 
 }
 var nivel1 = document.getElementById('nivel-1');
@@ -64,7 +54,7 @@ class Board2{
         ctx2.fillText("♫: " + score2,20,60);  
         ctx2.font = "40px Arial"
         ctx2.fillStyle = "white"
-        ctx2.fillText("Time:" + Math.floor(time2 / 60),740,60)       
+        ctx2.fillText("Time: " + Math.floor(time2 / 60),730,60)       
         }
 
        
@@ -74,13 +64,32 @@ class Board2{
 class Personaje2{
     constructor(){
         this.x = 360
-        this.y = 50
-        this.width = 200
-        this.height = 200
-        this.image = new Image()
-        this.image.src = images2.personaje2
-        this.image.onload = () => {
-            this.draw()
+        this.y = 30
+        this.width = 170
+        this.height = 240
+        this.image7 = new Image()
+        this.image7.src = "./images/personaje1-2.png"
+        this.image8 = new Image()
+        this.image8.src = "./images/personaje2-2.png"
+        this.image9 = new Image()
+        this.image9.src = "./images/personaje3-2.png"
+        this.image10 = new Image()
+        this.image10.src = "./images/personaje4-2.png"
+        this.image11 = new Image()
+        this.image11.src = "./images/personaje5-2.png"
+        this.image12= new Image()
+        this.image12.src = "./images/personaje6-2.png"
+        this.personaje2 = this.image7
+    }
+
+    animate(){
+        if(time % 5 === 0){
+            if(this.personaje2 === this.image7) this.personaje2 = this.image8
+            else if(this.personaje2 === this.image8) this.personaje2 = this.image9
+            else if(this.personaje2 === this.image9) this.personaje2 = this.image10
+            else if(this.personaje2 === this.image10) this.personaje2 = this.image11
+            else if(this.personaje2 === this.image11) this.personaje2 = this.image12
+            else if(this.personaje2 === this.image12) this.personaje2 = this.image7
         }
     }
 
@@ -94,7 +103,8 @@ class Personaje2{
     }
 
     draw(){
-          ctx2.drawImage(this.image, this.x, this.y,this.width, this.height)
+        this.animate ()
+          ctx2.drawImage(this.personaje2, this.x, this.y,this.width, this.height)
     }
 
     goRight2(){
@@ -107,6 +117,93 @@ class Personaje2{
 } // clase Personaje 1 
 
 
+// clase Audiencia
+class Audiencia2{
+    constructor(){
+        this.x = 0
+        this.y = 350
+        this.width = 900
+        this.height = 90
+        this.image3 = new Image()
+        this.image3.src = "./images/audiencia1-2.png"
+        this.image4 = new Image()
+        this.image4.src = "./images/audiencia2-2.png"
+        this.audiencia2 = this.image3
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.audiencia2 === this.image3) this.audiencia2 = this.image4
+            else if(this.audiencia2 === this.image4) this.audiencia2 = this.image3
+            else if(this.audiencia2 === this.image3) this.audiencia2 = this.image4
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx2.drawImage(this.audiencia2,this.x,this.y,this.width,this.height)
+    }
+}
+
+// clase Lights
+class LeftLight2{
+    constructor(){
+        this.x = 50
+        this.y = 0
+        this.width = 323
+        this.height = 227
+        this.image4 = new Image()
+        this.image4.src = "./images/lightleft4.png"
+        this.image5 = new Image()
+        this.image5.src = "./images/lightleft6.png"
+        this.image6 = new Image()
+        this.image6.src = "./images/lightleft5.png"
+        this.leftlight2 = this.image4
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.leftlight2 === this.image4) this.leftlight2 = this.image5
+            else if(this.leftlight2 === this.image5) this.leftlight2 = this.image6
+            else if(this.leftlight2 === this.image6) this.leftlight2 = this.image4
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx2.drawImage(this.leftlight2,this.x,this.y,this.width,this.height)
+    }
+}
+
+// clase Right Light
+class RightLight2{
+    constructor(){
+        this.x = 527
+        this.y = 0
+        this.width = 323
+        this.height = 227
+        this.image4 = new Image()
+        this.image4.src = "./images/lightright4.png"
+        this.image5 = new Image()
+        this.image5.src = "./images/lightright5.png"
+        this.image6 = new Image()
+        this.image6.src = "./images/lightright6.png"
+        this.rightlight2 = this.image4
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.rightlight2 === this.image4) this.rightlight2 = this.image5
+            else if(this.rightlight2 === this.image5) this.rightlight2 = this.image6
+            else if(this.rightlight2 === this.image6) this.rightlight2 = this.image4
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx2.drawImage(this.rightlight2,this.x,this.y,this.width,this.height)
+    }
+}
 
 // clase Obstaculo
 class Obstaculos2{
@@ -131,14 +228,14 @@ class Tomates2{
         this.y = 400 
         this.tipo = tipo
         this.width = 30
-        this.height = 30
+        this.height = 32
         this.image = new Image()
         this.image.src = images2.tomate2
         this.image.onload = () => {
             this.draw()
         } 
         this.crash2 = new Audio()
-         this.crash2.src = "boo.mp3"
+        this.crash2.src = "boo.mp3"
     }
 
     draw(){
@@ -153,7 +250,7 @@ class Notas2{
         this.x = x 
         this.y = 400 
         this.width = 30
-        this.height = 30
+        this.height = 80
         this.tipo = tipo
         this.image = new Image()
         this.image.src = images2.nota2
@@ -165,7 +262,7 @@ class Notas2{
     }
 
     draw(){
-        this.y-=2
+        this.y-=1.5
         ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -176,7 +273,7 @@ class Botellas2{
         this.x = x 
         this.y = 400 
         this.width = 30
-        this.height = 30
+        this.height = 80
         this.tipo = tipo
         this.image = new Image()
         this.image.src = images2.botella2
@@ -188,7 +285,7 @@ class Botellas2{
     }
 
     draw(){
-        this.y-=2
+        this.y-=2.5
         ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -201,6 +298,9 @@ var obstaculo2 = new Obstaculos2()
 var nota2 = new Notas2 ()
 var tomate2 = new Tomates2()
 var botella2 = new Botellas2()
+var audiencia2 = new Audiencia2()
+var rightlight2 = new RightLight2()
+var leftlight2 = new LeftLight2()
 
 
 //Funciones principales
@@ -208,9 +308,12 @@ function update2(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height)
     board2.draw()
     personaje2.draw()
+    audiencia2.draw()
+    rightlight2.draw()
+    leftlight2.draw()
     drawObstaculos2()
     checkCollitions2()
-    if((time2/60)===10)gameOver2()
+    if((time2/60)===60)gameOver2()
     time2++
     //frames2++
 }
@@ -219,19 +322,19 @@ function start2(){
     if(interval2) return
     if(board2.stage1 == true) {
         interval2 = setInterval(update2, 1000/60);
-        obstaculosInterval2 = setInterval(generateObstaculos2,5000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,4500)
     }
     if(board2.stage2 == true) {
         interval2 = setInterval(update2, 1000/60);
-        obstaculosInterval2 = setInterval(generateObstaculos2,4000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,3500)
     }
     if(board2.stage3 == true) {
         interval2 = setInterval(update2, 1000/60);
-        obstaculosInterval2 = setInterval(generateObstaculos2,3000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,2000)
     }
     if(board2.stage4 == true) {
         interval2 = setInterval(update2, 1000/60);
-        obstaculosInterval2 = setInterval(generateObstaculos2,2000)
+        obstaculosInterval2 = setInterval(generateObstaculos2,1500)
     }
 }
 
@@ -241,8 +344,6 @@ function gameOver2(){
     higherScore2()
     clearInterval(obstaculosInterval2)
     interval2 = null
-    ctx2.fillStyle = "yellow"
-    ctx2.fillText("Press 'esc' to restart", 50,300)
 }
 
 //funciones Auxiliares
@@ -280,13 +381,13 @@ function checkCollitions2(){
             var pos2 = obstaculos2.indexOf(obstaculo2);
             obstaculos2.splice(obstaculo2);
             if(obstaculo2.tipo=="Tomate"){
-                score2--
+                score2-=5
             } 
             if(obstaculo2.tipo=="Botella"){
-                score2--
+                score2-=10
             }
             if(obstaculo2.tipo=="Nota"){
-                score2++
+                score2+=10
             }
         }
     })

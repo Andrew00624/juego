@@ -18,8 +18,8 @@ var images = {
     bg:"./images/stage.jpg",
     personaje:"./images/guitarist.png",
     tomate: "./images/tomato.png",
-    botella:"./images/water.png",
-    nota: "./images/music-player.png"
+    botella:"./images/bottle.png",
+    nota: "./images/note.png"
 
 }
 var nivel1 = document.getElementById('nivel-1');
@@ -60,7 +60,7 @@ class Board{
         ctx.fillText("♫: " + score,20,60);   
         ctx.font = "40px Arial"
         ctx.fillStyle = "white"
-        ctx.fillText("Time:" + Math.floor(time / 60),740,60)    
+        ctx.fillText("Time: " + Math.floor(time / 60),730,60)    
         }
 
        
@@ -70,13 +70,32 @@ class Board{
 class Personaje{
     constructor(){
         this.x = 360
-        this.y = 50
-        this.width = 200
-        this.height = 200
-        this.image = new Image()
-        this.image.src = images.personaje
-        this.image.onload = () => {
-        this.draw()
+        this.y = 30
+        this.width = 170
+        this.height = 240
+        this.image1 = new Image()
+        this.image1.src = "./images/personaje1.png"
+        this.image2 = new Image()
+        this.image2.src = "./images/personaje2.png"
+        this.image3 = new Image()
+        this.image3.src = "./images/personaje3.png"
+        this.image4 = new Image()
+        this.image4.src = "./images/personaje4.png"
+        this.image5 = new Image()
+        this.image5.src = "./images/personaje5.png"
+        this.image6 = new Image()
+        this.image6.src = "./images/personaje6.png"
+        this.personaje = this.image1
+    }
+
+    animate(){
+        if(time % 5 === 0){
+            if(this.personaje === this.image1) this.personaje = this.image2
+            else if(this.personaje === this.image2) this.personaje = this.image3
+            else if(this.personaje === this.image3) this.personaje = this.image4
+            else if(this.personaje === this.image4) this.personaje = this.image5
+            else if(this.personaje === this.image5) this.personaje = this.image6
+            else if(this.personaje === this.image6) this.personaje = this.image1
         }
     }
 
@@ -90,7 +109,8 @@ class Personaje{
     }
 
     draw(){
-          ctx.drawImage(this.image, this.x, this.y,this.width, this.height)
+          this.animate ()
+          ctx.drawImage(this.personaje, this.x, this.y,this.width, this.height)
     }
 
     goRight(){
@@ -102,6 +122,96 @@ class Personaje{
       
 
 } // clase Personaje 1 
+
+
+
+// clase Audiencia
+class Audiencia{
+    constructor(){
+        this.x = 0
+        this.y = 350
+        this.width = 900
+        this.height = 90
+        this.image1 = new Image()
+        this.image1.src = "./images/audiencia1.png"
+        this.image2 = new Image()
+        this.image2.src = "./images/audiencia2.png"
+        this.audiencia = this.image1
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.audiencia === this.image1) this.audiencia = this.image2
+            else if(this.audiencia === this.image2) this.audiencia = this.image1
+            else if(this.audiencia === this.image1) this.audiencia = this.image2
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx.drawImage(this.audiencia,this.x,this.y,this.width,this.height)
+    }
+}
+
+// clase Lights
+class LeftLight{
+    constructor(){
+        this.x = 50
+        this.y = 0
+        this.width = 323
+        this.height = 227
+        this.image1 = new Image()
+        this.image1.src = "./images/lightleft1.png"
+        this.image2 = new Image()
+        this.image2.src = "./images/lightleft2.png"
+        this.image3 = new Image()
+        this.image3.src = "./images/lightleft3.png"
+        this.leftlight = this.image1
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.leftlight === this.image1) this.leftlight = this.image2
+            else if(this.leftlight === this.image2) this.leftlight = this.image3
+            else if(this.leftlight === this.image3) this.leftlight = this.image1
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx.drawImage(this.leftlight,this.x,this.y,this.width,this.height)
+    }
+}
+
+// clase Right Light
+class RightLight{
+    constructor(){
+        this.x = 527
+        this.y = 0
+        this.width = 323
+        this.height = 227
+        this.image1 = new Image()
+        this.image1.src = "./images/lightright1.png"
+        this.image2 = new Image()
+        this.image2.src = "./images/lightright2.png"
+        this.image3 = new Image()
+        this.image3.src = "./images/lightright3.png"
+        this.rightlight = this.image1
+    }
+
+    animate(){
+        if(time % 20 === 0){
+            if(this.rightlight === this.image1) this.rightlight = this.image2
+            else if(this.rightlight === this.image2) this.rightlight = this.image3
+            else if(this.rightlight === this.image3) this.rightlight = this.image1
+        }
+    }
+
+    draw(){
+        this.animate()
+        ctx.drawImage(this.rightlight,this.x,this.y,this.width,this.height)
+    }
+}
 
 
 
@@ -128,7 +238,7 @@ class Tomates{
         this.y = 400 
         this.tipo = tipo
         this.width = 30
-        this.height = 30
+        this.height = 32
         this.image = new Image()
         this.image.src = images.tomate
         this.image.onload = () => {
@@ -150,7 +260,7 @@ class Notas{
         this.x = x 
         this.y = 400 
         this.width = 30
-        this.height = 30
+        this.height = 80
         this.tipo = tipo
         this.image = new Image()
         this.image.src = images.nota
@@ -162,7 +272,7 @@ class Notas{
     }
 
     draw(){
-        this.y-=2
+        this.y-=1.5
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -173,7 +283,7 @@ class Botellas{
         this.x = x 
         this.y = 400 
         this.width = 30
-        this.height = 30
+        this.height = 80
         this.tipo = tipo
         this.image = new Image()
         this.image.src = images.botella
@@ -185,7 +295,7 @@ class Botellas{
     }
 
     draw(){
-        this.y-=2
+        this.y-=2.5
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -198,17 +308,22 @@ var obstaculo = new Obstaculos()
 var nota = new Notas ()
 var tomate = new Tomates()
 var botella = new Botellas()
+var audiencia = new Audiencia()
+var rightlight = new RightLight()
+var leftlight = new LeftLight()
 
 
 //Funciones principales
 function update(){
-    console.log(frames)
     ctx.clearRect(0,0,canvas.width,canvas.height)
     board.draw()
     personaje.draw()
+    audiencia.draw()
+    leftlight.draw()
+    rightlight.draw()
     drawObstaculos()
     checkCollitions()
-    if((time/60)===10) gameOver()
+    if((time/60)===60) gameOver()
     time++
    // frames++
 }
@@ -217,19 +332,19 @@ function start(){
     if(interval) return
     if(board.stage1 == true) {
         interval = setInterval(update, 1000/60);
-        obstaculosInterval = setInterval(generateObstaculos,5000)
+        obstaculosInterval = setInterval(generateObstaculos,4500)
     }
     if(board.stage2 == true) {
         interval = setInterval(update, 1000/60);
-        obstaculosInterval = setInterval(generateObstaculos,4000)
+        obstaculosInterval = setInterval(generateObstaculos,3500)
     }
     if(board.stage3 == true) {
         interval = setInterval(update, 1000/60);
-        obstaculosInterval = setInterval(generateObstaculos,3000)
+        obstaculosInterval = setInterval(generateObstaculos,2000)
     }
     if(board.stage4 == true) {
         interval = setInterval(update, 1000/60);
-        obstaculosInterval = setInterval(generateObstaculos,2000)
+        obstaculosInterval = setInterval(generateObstaculos,1500)
     }
     
 }
@@ -244,8 +359,6 @@ function gameOver(){
         board.back.pause()
         board.fuel.pause()
         board.chona.pause()
-        ctx.fillStyle = "yellow"
-        ctx.fillText("Press 'esc' to restart", 50,300)
 }
 
 //funciones Auxiliares
@@ -283,13 +396,13 @@ function checkCollitions(){
             var pos = obstaculos.indexOf(obstaculo);
             obstaculos.splice(obstaculo);
             if(obstaculo.tipo=="Tomate"){
-                score--
+                score-=5
             } 
             if(obstaculo.tipo=="Botella"){
-                score--
+                score-=10
             }
             if(obstaculo.tipo=="Nota"){
-                score++
+                score+=10
             }
         }
     })
@@ -303,7 +416,7 @@ function higherScore (){
         ctx.fillText("♫: " + score, 50,350)
     } else if (score > score2){
         ctx.font = "60px Avenir"
-        ctx.fillText("You Rock!!" + score, 50,250)
+        ctx.fillText("You Rock!!", 50,250)
         ctx.fillText("♫: " + score, 50,350)
     } else {
         ctx.font = "60px Avenir"
