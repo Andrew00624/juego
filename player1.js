@@ -55,12 +55,12 @@ class Board{
     }
         draw(){
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
-        ctx.font = "50px Arial";
+        ctx.font = "40px Arial";
         ctx.fillStyle = "#fff";
         ctx.fillText("♫: " + score,20,60);   
-        ctx.font = "40px Arial"
+        ctx.font = "30px Arial"
         ctx.fillStyle = "white"
-        ctx.fillText("Time: " + Math.floor(time / 60),730,60)    
+        ctx.fillText("Tiempo: " + Math.floor(time / 60),730,60)  
         }
 
        
@@ -70,7 +70,7 @@ class Board{
 class Personaje{
     constructor(){
         this.x = 360
-        this.y = 30
+        this.y = 20
         this.width = 170
         this.height = 240
         this.image1 = new Image()
@@ -249,7 +249,7 @@ class Tomates{
     }
 
     draw(){
-        this.y-=2
+        this.y-=2.5
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -272,7 +272,7 @@ class Notas{
     }
 
     draw(){
-        this.y-=1.5
+        this.y-=2
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -295,7 +295,7 @@ class Botellas{
     }
 
     draw(){
-        this.y-=2.5
+        this.y-=3
         ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -325,7 +325,6 @@ function update(){
     checkCollitions()
     if((time/60)===60) gameOver()
     time++
-   // frames++
 }
 
 function start(){
@@ -411,17 +410,17 @@ function checkCollitions(){
 
 function higherScore (){
     if (score === score2){
-        ctx.font = "60px Avenir"
-        ctx.fillText("You Both Rock or Suck", 50,250)
-        ctx.fillText("♫: " + score, 50,350)
+        ctx.font = "700 60px Arial"
+        ctx.fillText("You Both Rock or Suck", 310,280)
+        ctx.fillText("♫: " + score, 370,350)
     } else if (score > score2){
-        ctx.font = "60px Avenir"
-        ctx.fillText("You Rock!!", 50,250)
-        ctx.fillText("♫: " + score, 50,350)
+        ctx.font = "700 60px Arial"
+        ctx.fillText("You Rock!!", 310,280)
+        ctx.fillText("♫: " + score, 370,350)
     } else {
-        ctx.font = "60px Avenir"
-        ctx.fillText("You Suck!!" + score , 50,250)
-        ctx.fillText("♫: " + score, 50,350)
+        ctx.font = "700 60px Arial"
+        ctx.fillText("You Suck!!" + score , 310,280)
+        ctx.fillText("♫: " + score, 370,350)
     }
 }
 
