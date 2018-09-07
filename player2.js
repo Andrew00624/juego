@@ -1,10 +1,10 @@
 
-//Canvas config
+//Canvas 
 var canvas2 = document.getElementById('player-2');
 var ctx2 = canvas2.getContext('2d')
 
 
-//Variables globales
+//Variables Globales
 var tomates2 = []
 var botellas2 = []
 var obstaculos2 = []
@@ -27,8 +27,7 @@ var nivel2 = document.getElementById('nivel-2');
 var nivel3 = document.getElementById('nivel-3');
 var nivel4 = document.getElementById('nivel-4');
 
-
-//clases
+//Clases
 class Board2{
     constructor(){
         this.x = 0
@@ -59,7 +58,7 @@ class Board2{
 
        
 
-} //clase Board
+} 
 
 class Personaje2{
     constructor(){
@@ -114,10 +113,8 @@ class Personaje2{
         this.x-=180
       }
 
-} // clase Personaje 1 
+} 
 
-
-// clase Audiencia
 class Audiencia2{
     constructor(){
         this.x = 0
@@ -145,7 +142,6 @@ class Audiencia2{
     }
 }
 
-// clase Lights
 class LeftLight2{
     constructor(){
         this.x = 50
@@ -175,7 +171,6 @@ class LeftLight2{
     }
 }
 
-// clase Right Light
 class RightLight2{
     constructor(){
         this.x = 527
@@ -205,7 +200,6 @@ class RightLight2{
     }
 }
 
-// clase Obstaculo
 class Obstaculos2{
     constructor(x,tipo){
         this.x = x 
@@ -221,7 +215,6 @@ class Obstaculos2{
     }
 }
   
-// clase Tomates
 class Tomates2{
     constructor(x,tipo){
         this.x = x 
@@ -244,7 +237,6 @@ class Tomates2{
     }
 }
 
-// clase Notas Musicales 
 class Notas2{
     constructor(x,tipo){
         this.x = x 
@@ -267,7 +259,6 @@ class Notas2{
     }
 }
 
-// Clase Botellas 
 class Botellas2{
     constructor(x,tipo){
         this.x = x 
@@ -303,7 +294,7 @@ var rightlight2 = new RightLight2()
 var leftlight2 = new LeftLight2()
 
 
-//Funciones principales
+//Funciones Principales
 function update2(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height)
     board2.draw()
@@ -313,7 +304,7 @@ function update2(){
     leftlight2.draw()
     drawObstaculos2()
     checkCollitions2()
-    if((time2/60)===10)gameOver2()
+    if((time2/60)===60)gameOver2()
     time2++
 }
 
@@ -345,8 +336,7 @@ function gameOver2(){
     interval2 = null
 }
 
-//funciones Auxiliares
-
+//Auxiliares
 function generateObstaculos2(){
     if(frames2 % 200 === 0){
         var obstaculo6 = new Tomates2(90,"Tomate")
@@ -395,7 +385,7 @@ function checkCollitions2(){
 function higherScore2(){
     if (score === score2){
         ctx2.font = "700 60px Arial"
-        ctx2.fillText("You Both Rock or Suck", 310,280)
+        ctx2.fillText("Tie", 310,280)
         ctx2.fillText("♫: " + score2, 370,350)
     } else if (score2 > score){
         ctx2.font = "700 60px Arial"
@@ -407,13 +397,6 @@ function higherScore2(){
         ctx2.fillText("♫: " + score2, 370,350)
     }
 }
-
-//los observadores
-
-
-
-
- 
 
 
 

@@ -1,10 +1,9 @@
 
-//Canvas config
+//Canvas 
 var canvas = document.getElementById('player-1');
 var ctx = canvas.getContext('2d')
 
-
-//Variables globales
+//Variables Globales
 var tomates = []
 var botellas = []
 var obstaculos = []
@@ -27,8 +26,7 @@ var nivel2 = document.getElementById('nivel-2');
 var nivel3 = document.getElementById('nivel-3');
 var nivel4 = document.getElementById('nivel-4');
 
-
-//clases
+//Clases
 class Board{
     constructor(){
         this.x = 0
@@ -61,11 +59,8 @@ class Board{
         ctx.font = "30px Arial"
         ctx.fillStyle = "white"
         ctx.fillText("Tiempo: " + Math.floor(time / 60),730,60)  
-        }
-
-       
-
-} //clase Board
+        }  
+}
 
 class Personaje{
     constructor(){
@@ -107,7 +102,6 @@ class Personaje{
         if(crash) item.crash.play()
         return crash;
     }
-
     draw(){
           this.animate ()
           ctx.drawImage(this.personaje, this.x, this.y,this.width, this.height)
@@ -118,14 +112,9 @@ class Personaje{
       }
       goLeft(){
         this.x-=180
-      }
-      
+      } 
+} 
 
-} // clase Personaje 1 
-
-
-
-// clase Audiencia
 class Audiencia{
     constructor(){
         this.x = 0
@@ -153,7 +142,6 @@ class Audiencia{
     }
 }
 
-// clase Lights
 class LeftLight{
     constructor(){
         this.x = 50
@@ -183,7 +171,6 @@ class LeftLight{
     }
 }
 
-// clase Right Light
 class RightLight{
     constructor(){
         this.x = 527
@@ -213,9 +200,6 @@ class RightLight{
     }
 }
 
-
-
-// clase Obstaculo
 class Obstaculos{
     constructor(x,tipo){
         this.x = x 
@@ -231,7 +215,6 @@ class Obstaculos{
     }
 }
   
-// clase Tomates
 class Tomates{
     constructor(x,tipo){
         this.x = x 
@@ -254,7 +237,6 @@ class Tomates{
     }
 }
 
-// clase Notas Musicales 
 class Notas{
     constructor(x,tipo){
         this.x = x 
@@ -277,7 +259,6 @@ class Notas{
     }
 }
 
-// Clase Botellas 
 class Botellas{
     constructor(x,tipo){
         this.x = x 
@@ -300,7 +281,6 @@ class Botellas{
     }
 }
 
-
 //Instancias
 var board = new Board()
 var personaje = new Personaje()
@@ -313,7 +293,7 @@ var rightlight = new RightLight()
 var leftlight = new LeftLight()
 
 
-//Funciones principales
+//Funciones Principales
 function update(){
     ctx.clearRect(0,0,canvas.width,canvas.height)
     board.draw()
@@ -360,8 +340,7 @@ function gameOver(){
         board.chona.pause()
 }
 
-//funciones Auxiliares
-
+//Auxiliares
 function generateObstaculos(){
     if(frames % 100 === 0){
         var obstaculo1 = new Tomates(90,"Tomate")
@@ -411,7 +390,7 @@ function checkCollitions(){
 function higherScore (){
     if (score === score2){
         ctx.font = "700 60px Arial"
-        ctx.fillText("You Both Rock or Suck", 310,280)
+        ctx.fillText("Tie", 310,280)
         ctx.fillText("♫: " + score, 370,350)
     } else if (score > score2){
         ctx.font = "700 60px Arial"
@@ -419,13 +398,12 @@ function higherScore (){
         ctx.fillText("♫: " + score, 370,350)
     } else {
         ctx.font = "700 60px Arial"
-        ctx.fillText("You Suck!!" + score , 310,280)
+        ctx.fillText("You Suck!!", 310,280)
         ctx.fillText("♫: " + score, 370,350)
     }
 }
 
-//los observadores
-
+//Observadores
 nivel1.addEventListener ("click", function(){
     board.stage1 = true;
     board2.stage1 = true;
